@@ -15,9 +15,14 @@ class AuctionsPage extends React.Component {
     this.setState({ auction });
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    alert(this.state.auction.description);
+  };
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <h2>Ongoing auctions</h2>
         <h3>Add auction</h3>
         <input
