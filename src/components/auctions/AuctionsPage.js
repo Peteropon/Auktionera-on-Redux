@@ -1,4 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import * as auctionActions from "../../redux/actions/auctionActions";
+import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
 
 class AuctionsPage extends React.Component {
   state = {
@@ -17,7 +21,7 @@ class AuctionsPage extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    alert(this.state.auction.description);
+    this.props.actions.createAuction(this.state.auction);
   };
 
   render() {
@@ -30,9 +34,31 @@ class AuctionsPage extends React.Component {
           onChange={this.handleChange}
           value={this.state.auction.description}
         ></input>
+
         <input type="submit" value="Save" />
+        {this.props.auctions.map((a) => (
+          <div key={a.description}>{a.description}</div>
+        ))}
       </form>
     );
   }
 }
-export default AuctionsPage;
+
+AuctionsPage.propTypes = {
+  auctions: PropTypes.array.isRequired,
+  actions: PropTypes.func.isRequired,
+};
+
+function mapStateToProps({ auctions }) {
+  return {
+    auctions,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(auctionActions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuctionsPage);
