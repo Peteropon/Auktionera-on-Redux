@@ -12,7 +12,7 @@ export function loadAuctionSuccess(auctions) {
 export function loadAuctions() {
   return function (dispatch) {
     return courseApi
-      .getCourses()
+      .getAuctions()
       .then((auctions) => {
         dispatch(loadAuctionSuccess(auctions));
       })
