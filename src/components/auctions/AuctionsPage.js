@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as auctionActions from "../../redux/actions/auctionActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
+import AuctionList from "./AuctionList";
 
 class AuctionsPage extends React.Component {
   componentDidMount() {
@@ -15,9 +16,7 @@ class AuctionsPage extends React.Component {
     return (
       <>
         <h2>Ongoing auctions</h2>
-        {this.props.auctions.map((a) => (
-          <div key={a.title}>{a.title}</div>
-        ))}
+        <AuctionList auctions={this.props.auctions}></AuctionList>
       </>
     );
   }
