@@ -1,6 +1,7 @@
 import * as types from "../actions/actionTypes";
+import initialState from "./initialState";
 
-export default function auctionReducer(state = [], action) {
+export default function auctionReducer(state = initialState.auctions, action) {
   switch (action.type) {
     case types.CREATE_AUCTION:
       return [...state, { ...action.auction }];
