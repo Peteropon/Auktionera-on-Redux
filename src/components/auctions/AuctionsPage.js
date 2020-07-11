@@ -5,48 +5,27 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 
 class AuctionsPage extends React.Component {
-  state = {
-    auction: {
-      description: "",
-      startBid: 0,
-      currentBid: 0,
-      seller: "",
-    },
-  };
-
-  handleChange = (e) => {
-    const auction = { ...this.state.auction, description: e.target.value };
-    this.setState({ auction });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.actions.createAuction(this.state.auction);
-  };
+  componentDidMount() {
+    this.props.actions.loadAuctions().catch((error) => {
+      alert("Loading auctions failed" + error);
+    });
+  }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <>
         <h2>Ongoing auctions</h2>
-        <h3>Add auction</h3>
-        <input
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.auction.description}
-        ></input>
-
-        <input type="submit" value="Save" />
         {this.props.auctions.map((a) => (
-          <div key={a.description}>{a.description}</div>
+          <div key={a.title}>{a.title}</div>
         ))}
-      </form>
+      </>
     );
   }
 }
 
 AuctionsPage.propTypes = {
   auctions: PropTypes.array.isRequired,
-  actions: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps({ auctions }) {
