@@ -27,7 +27,7 @@ const AuctionList = ({ auctions }) => (
             <td>
               <Link to={"/course/" + auction.slug}>{auction.description}</Link>
             </td>
-            <td>{auction.seller}</td>
+            <td>{auction.userName}</td>
             <td>{auction.category}</td>
           </tr>
         );
