@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import * as auctionActions from "../../redux/actions/auctionActions";
 import * as userActions from "../../redux/actions/userActions";
 import PropTypes from "prop-types";
+import AuctionForm from "./AuctionForm";
+import { newAuction } from "../../../tools/mockData";
 
-class ManageAuctionPage extends React.Component {
-  componentDidMount() {
-    const { loadUsers, loadAuctions, users, auctions } = this.props;
+function ManageAuctionPage({
+  loadUsers,
+  loadAuctions,
+  users,
+  auctions,
+  ...props
+}) {
+  const [auction, setAuction] = useState({ ...props.auction });
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
     if (auctions.length === 0) {
       loadAuctions().catch((error) => {
         alert("Loading auctions failed" + error);
@@ -18,18 +28,15 @@ class ManageAuctionPage extends React.Component {
         alert("Loading users failed" + error);
       });
     }
-  }
+  }, []);
 
-  render() {
-    return (
-      <>
-        <h2>Manage auctions</h2>
-      </>
-    );
-  }
+  return (
+    <AuctionForm errors={errors} auction={auction} users={users}></AuctionForm>
+  );
 }
 
 ManageAuctionPage.propTypes = {
+  auction: PropTypes.object.isRequired,
   auctions: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired,
   loadAuctions: PropTypes.func.isRequired,
@@ -38,6 +45,7 @@ ManageAuctionPage.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    auction: newAuction,
     auctions: state.auctions,
     users: state.users,
   };

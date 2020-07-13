@@ -77,7 +77,7 @@ const users = [
   { id: 3, name: "Dan Wahlin" },
 ];
 
-const newCourse = {
+const newAuction = {
   id: null,
   description: "",
   seller: null,
@@ -86,7 +86,7 @@ const newCourse = {
 
 // Using CommonJS style export so we can consume via Node (without using Babel-node)
 module.exports = {
-  newCourse,
+  newAuction,
   auctions,
   users,
 };
