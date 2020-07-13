@@ -30,8 +30,21 @@ function ManageAuctionPage({
     }
   }, []);
 
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setAuction((prevAuction) => ({
+      ...prevAuction,
+      [name]: name === "userId" ? parseInt(value, 10) : value,
+    }));
+  }
+
   return (
-    <AuctionForm errors={errors} auction={auction} users={users}></AuctionForm>
+    <AuctionForm
+      errors={errors}
+      auction={auction}
+      users={users}
+      onChange={handleChange}
+    ></AuctionForm>
   );
 }
 

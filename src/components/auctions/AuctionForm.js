@@ -28,16 +28,16 @@ const AuctionForm = ({
       />
 
       <SelectInput
-        name="authorId"
-        label="Author"
-        value={auction.authorId || ""}
-        defaultOption="Select Author"
-        options={users.map((author) => ({
-          value: author.id,
-          text: author.name,
+        name="userId"
+        label="User"
+        value={auction.userId || ""}
+        defaultOption="Select user"
+        options={users.map((user) => ({
+          value: user.id,
+          text: user.name,
         }))}
         onChange={onChange}
-        error={errors.author}
+        error={errors.user}
       />
 
       <TextInput
