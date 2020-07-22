@@ -6,6 +6,7 @@ import SelectInput from "../common/SelectInput";
 const AuctionForm = ({
   auction,
   users,
+  categories,
   onSave,
   onChange,
   saving = false,
@@ -28,9 +29,9 @@ const AuctionForm = ({
       />
 
       <SelectInput
-        name="userId"
-        label="User"
-        value={auction.userId || ""}
+        name="user"
+        label="Seller"
+        value={auction.user || ""}
         defaultOption="Select user"
         options={users.map((user) => ({
           value: user.id,
@@ -40,10 +41,15 @@ const AuctionForm = ({
         error={errors.user}
       />
 
-      <TextInput
+      <SelectInput
         name="category"
         label="Category"
-        value={auction.category}
+        value={auction.category || ""}
+        defaultOption="Select category"
+        options={categories.map((c) => ({
+          value: c.id,
+          text: c.name,
+        }))}
         onChange={onChange}
         error={errors.category}
       />
@@ -57,6 +63,7 @@ const AuctionForm = ({
 
 AuctionForm.propTypes = {
   users: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
   auction: PropTypes.object.isRequired,
   errors: PropTypes.object,
   onSave: PropTypes.func.isRequired,
