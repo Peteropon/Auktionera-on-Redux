@@ -14,8 +14,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/auctions" component={AuctionsPage} />
-        <Route path="/auction:id" component={ManageAuctionPage} />
         <Route path="/auction" component={ManageAuctionPage} />
+        <Route path="/auction:id" component={ManageAuctionPage} />
         <Route path="/about" component={AboutPage} />
         <Route component={PageNotFound} />
       </Switch>

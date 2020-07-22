@@ -13,6 +13,7 @@ function AuctionsPage({
   auctions,
   users,
   categories,
+  history,
 }) {
   useEffect(() => {
     if (users.length === 0) {
@@ -37,6 +38,13 @@ function AuctionsPage({
   return (
     <>
       <h2>Ongoing auctions</h2>
+      <button
+        style={{ marginBottom: 20 }}
+        className="btn btn-primary add-course"
+        onClick={() => history.push("/auction")}
+      >
+        Add auction
+      </button>
       <AuctionList auctions={auctions} />
     </>
   );
@@ -49,6 +57,7 @@ AuctionsPage.propTypes = {
   loadAuctions: PropTypes.func.isRequired,
   loadUsers: PropTypes.func.isRequired,
   loadCategories: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
