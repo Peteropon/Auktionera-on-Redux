@@ -23,7 +23,7 @@ const AuctionForm = ({
       <TextInput
         name="description"
         label="Description"
-        value={auction.description}
+        value={auction.description || ""}
         onChange={onChange}
         error={errors.description}
       />
