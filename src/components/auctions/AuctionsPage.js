@@ -5,6 +5,7 @@ import { loadUsers } from "../../redux/actions/userActions";
 import { loadCategories } from "../../redux/actions/categoryActions";
 import PropTypes from "prop-types";
 import AuctionList from "./AuctionList";
+import Spinner from "../common/Spinner";
 
 function AuctionsPage({
   loadAuctions,
@@ -38,6 +39,7 @@ function AuctionsPage({
   return (
     <>
       <h2>Ongoing auctions</h2>
+      <Spinner />
       <button
         style={{ marginBottom: 20 }}
         className="btn btn-primary add-course"
