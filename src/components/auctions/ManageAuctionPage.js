@@ -6,6 +6,7 @@ import * as categoryActions from "../../redux/actions/categoryActions";
 import PropTypes from "prop-types";
 import AuctionForm from "./AuctionForm";
 import { newAuction } from "../../../tools/mockData";
+import Spinner from "../common/Spinner";
 
 function ManageAuctionPage({
   loadUsers,
@@ -58,7 +59,11 @@ function ManageAuctionPage({
     });
   }
 
-  return (
+  return auctions.length === 0 ||
+    users.length === 0 ||
+    categories.length === 0 ? (
+    <Spinner />
+  ) : (
     <AuctionForm
       errors={errors}
       auction={auction}
@@ -87,10 +92,10 @@ export function getParsedId(pathname) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const id = getParsedId(ownProps.location.pathname);
+  const auctionId = getParsedId(ownProps.location.pathname);
   const auction =
-    state.auctions.length > 0
-      ? state.auctions.find((a) => a.id === id)
+    auctionId && state.auctions.length > 0
+      ? state.auctions.find((a) => a.id === auctionId)
       : newAuction;
   return {
     auction,
