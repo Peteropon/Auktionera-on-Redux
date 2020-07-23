@@ -21,6 +21,7 @@ function ManageAuctionPage({
 }) {
   const [auction, setAuction] = useState({ ...props.auction });
   const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (auctions.length === 0) {
@@ -54,6 +55,7 @@ function ManageAuctionPage({
 
   function handleSave(event) {
     event.preventDefault();
+    setSaving(true);
     saveAuction(auction).then(() => {
       history.push("/auctions");
     });
@@ -71,6 +73,7 @@ function ManageAuctionPage({
       categories={categories}
       onChange={handleChange}
       onSave={handleSave}
+      saving={saving}
     />
   );
 }
