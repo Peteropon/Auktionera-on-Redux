@@ -1,5 +1,6 @@
 import * as types from "./actionTypes";
 import * as courseApi from "../../api/courseApi";
+import { beginApiCall } from "./apiStatusActions";
 
 export function loadAuctionSuccess(auctions) {
   return { type: types.LOAD_AUCTIONS_SUCCESS, auctions };
@@ -15,6 +16,7 @@ export function createAuctionSuccess(auctions) {
 
 export function loadAuctions() {
   return function (dispatch) {
+    dispatch(beginApiCall());
     return courseApi
       .getAuctions()
       .then((auctions) => {
@@ -28,6 +30,7 @@ export function loadAuctions() {
 
 export function saveAuction(auction) {
   return function (dispatch) {
+    dispatch(beginApiCall());
     return courseApi
       .saveAuction(auction)
       .then((savedAuction) => {
