@@ -15,6 +15,7 @@ function AuctionsPage({
   users,
   categories,
   history,
+  loading,
 }) {
   useEffect(() => {
     if (users.length === 0) {
@@ -39,15 +40,20 @@ function AuctionsPage({
   return (
     <>
       <h2>Ongoing auctions</h2>
-      <Spinner />
-      <button
-        style={{ marginBottom: 20 }}
-        className="btn btn-primary add-course"
-        onClick={() => history.push("/auction")}
-      >
-        Add auction
-      </button>
-      <AuctionList auctions={auctions} />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <button
+            style={{ marginBottom: 20 }}
+            className="btn btn-primary add-course"
+            onClick={() => history.push("/auction")}
+          >
+            Add auction
+          </button>
+          <AuctionList auctions={auctions} />
+        </>
+      )}
     </>
   );
 }
@@ -60,6 +66,7 @@ AuctionsPage.propTypes = {
   loadUsers: PropTypes.func.isRequired,
   loadCategories: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -77,6 +84,7 @@ function mapStateToProps(state) {
           }),
     users: state.users,
     categories: state.categories,
+    loading: state.apiCallsInProgress > 0,
   };
 }
 /*  || 
