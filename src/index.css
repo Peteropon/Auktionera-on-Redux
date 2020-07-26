@@ -6,3 +6,8 @@
 nav {
   padding: 20px 0;
 }
+
+.card {
+  min-width: auto;
+  margin-bottom: 10px;
+}
