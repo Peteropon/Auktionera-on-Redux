@@ -1,5 +1,5 @@
 {
-  "name": "ps-redux",
+  "name": "auktionera-on-redux",
   "description": "React and Redux Pluralsight course by Cory House",
   "scripts": {
     "start": "run-p start:dev start:api",
@@ -8,17 +8,19 @@
     "start:api": "node tools/apiServer.js"
   },
   "dependencies": {
-    "bootstrap": "4.3.1",
+    "bootstrap": "^4.3.1",
     "immer": "2.1.3",
     "prop-types": "15.7.2",
     "react": "16.8.4",
+    "react-bootstrap": "^1.2.2",
     "react-dom": "16.8.4",
     "react-redux": "6.0.1",
     "react-router-dom": "5.0.0",
     "react-toastify": "4.5.2",
     "redux": "4.0.1",
     "redux-thunk": "2.3.0",
-    "reselect": "4.0.0"
+    "reselect": "4.0.0",
+    "url-loader": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.3.4",

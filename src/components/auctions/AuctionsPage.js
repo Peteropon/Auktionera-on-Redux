@@ -87,8 +87,6 @@ function mapStateToProps(state) {
     loading: state.apiCallsInProgress > 0,
   };
 }
-/*  || 
-, */
 
 const mapDispatchToProps = {
   loadAuctions,
