@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import AuctionForm from "./AuctionForm";
 import { newAuction } from "../../../tools/mockData";
 import Spinner from "../common/Spinner";
+import { toast } from "react-toastify";
 
 function ManageAuctionPage({
   loadUsers,
@@ -56,9 +57,15 @@ function ManageAuctionPage({
   function handleSave(event) {
     event.preventDefault();
     setSaving(true);
-    saveAuction(auction).then(() => {
-      history.push("/auctions");
-    });
+    saveAuction(auction)
+      .then(() => {
+        toast.success("Auction saved!");
+        history.push("/auctions");
+      })
+      .catch((error) => {
+        setSaving(false);
+        setErrors({ onSave: error.message });
+      });
   }
 
   return auctions.length === 0 ||

@@ -6,6 +6,8 @@ import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
 import AuctionsPage from "./auctions/AuctionsPage";
 import ManageAuctionPage from "./auctions/ManageAuctionPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -13,12 +15,13 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/auctions" component={AuctionsPage} />
-        <Route path="/auction" component={ManageAuctionPage} />
-        <Route path="/auction:id" component={ManageAuctionPage} />
         <Route path="/about" component={AboutPage} />
+        <Route path="/auctions" component={AuctionsPage} />
+        <Route path="/auction:id" component={ManageAuctionPage} />
+        <Route path="/auction" component={ManageAuctionPage} />
         <Route component={PageNotFound} />
       </Switch>
+      <ToastContainer autoClose={2500} hideProgressBar />
     </div>
   );
 }
