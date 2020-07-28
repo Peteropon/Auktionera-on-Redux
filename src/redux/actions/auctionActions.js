@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 import * as courseApi from "../../api/courseApi";
-import { beginApiCall } from "./apiStatusActions";
+import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 export function loadAuctionSuccess(auctions) {
   return { type: types.LOAD_AUCTIONS_SUCCESS, auctions };
@@ -23,6 +23,7 @@ export function loadAuctions() {
         dispatch(loadAuctionSuccess(auctions));
       })
       .catch((error) => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };
@@ -39,6 +40,7 @@ export function saveAuction(auction) {
           : dispatch(createAuctionSuccess(savedAuction));
       })
       .catch((error) => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };
