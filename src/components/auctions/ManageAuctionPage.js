@@ -54,8 +54,20 @@ function ManageAuctionPage({
     }));
   }
 
+  function formIsValid() {
+    const { title, user, category } = auction;
+    const errors = {};
+    if (!title) errors.title = "Title is required";
+    if (!user) errors.user = "User is required";
+    if (!category) errors.category = "Category is required";
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  }
+
   function handleSave(event) {
     event.preventDefault();
+    if (!formIsValid()) return;
     setSaving(true);
     saveAuction(auction)
       .then(() => {

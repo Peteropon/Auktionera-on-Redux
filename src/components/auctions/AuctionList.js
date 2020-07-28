@@ -25,15 +25,18 @@ const AuctionList = ({ auctions }) => (
               />
               <Card.Body>
                 <OverlayTrigger
-                  placement="top"
-                  overlay={<Tooltip>Click for more details.</Tooltip>}
+                  placement="auto-start"
+                  overlay={
+                    <Tooltip id="title-tooltip">
+                      Click for more details.
+                    </Tooltip>
+                  }
                   delay={200}
                 >
                   <Card.Title>
                     <Link to={"/auction/" + auction.id}>{auction.title}</Link>
                   </Card.Title>
                 </OverlayTrigger>
-
                 <button className="btn btn-info">Bid!</button>
               </Card.Body>
               <Card.Footer>

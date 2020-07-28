@@ -21,11 +21,11 @@ const AuctionForm = ({
         </div>
       )}
       <TextInput
-        name="description"
-        label="Description"
-        value={auction.description || ""}
+        name="title"
+        label="Title"
+        value={auction.title || ""}
         onChange={onChange}
-        error={errors.description}
+        error={errors.title}
       />
 
       <SelectInput
