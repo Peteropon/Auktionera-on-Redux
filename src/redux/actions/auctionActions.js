@@ -6,12 +6,12 @@ export function loadAuctionSuccess(auctions) {
   return { type: types.LOAD_AUCTIONS_SUCCESS, auctions };
 }
 
-export function updateAuctionSuccess(auctions) {
-  return { type: types.UPDATE_AUCTION_SUCCESS, auctions };
+export function updateAuctionSuccess(auction) {
+  return { type: types.UPDATE_AUCTION_SUCCESS, auction };
 }
 
-export function createAuctionSuccess(auctions) {
-  return { type: types.CREATE_AUCTION_SUCCESS, auctions };
+export function createAuctionSuccess(auction) {
+  return { type: types.CREATE_AUCTION_SUCCESS, auction };
 }
 
 export function loadAuctions() {
@@ -30,11 +30,13 @@ export function loadAuctions() {
 }
 
 export function saveAuction(auction) {
+  debugger;
   return function (dispatch) {
     dispatch(beginApiCall());
     return courseApi
       .saveAuction(auction)
       .then((savedAuction) => {
+        debugger;
         auction.id
           ? dispatch(updateAuctionSuccess(savedAuction))
           : dispatch(createAuctionSuccess(savedAuction));

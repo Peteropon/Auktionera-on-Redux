@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { loadAuctions, saveAuction } from "../../redux/actions/auctionActions";
-import * as userActions from "../../redux/actions/userActions";
-import * as categoryActions from "../../redux/actions/categoryActions";
+import { loadUsers } from "../../redux/actions/userActions";
+import { loadCategories } from "../../redux/actions/categoryActions";
 import PropTypes from "prop-types";
 import AuctionForm from "./AuctionForm";
 import { newAuction } from "../../../tools/mockData";
@@ -10,13 +10,13 @@ import Spinner from "../common/Spinner";
 import { toast } from "react-toastify";
 
 function ManageAuctionPage({
-  loadUsers,
-  loadCategories,
-  loadAuctions,
-  saveAuction,
   users,
   auctions,
   categories,
+  loadUsers,
+  loadAuctions,
+  loadCategories,
+  saveAuction,
   history,
   ...props
 }) {
@@ -110,14 +110,18 @@ ManageAuctionPage.propTypes = {
 };
 
 export function getParsedId(pathname) {
-  return parseInt(pathname.substring(9));
+  return parseInt(pathname.substring(9)) || null;
+}
+
+export function getAuctionById(auctions, id) {
+  return auctions.find((auction) => auction.id === id) || null;
 }
 
 function mapStateToProps(state, ownProps) {
   const auctionId = getParsedId(ownProps.location.pathname);
   const auction =
     auctionId && state.auctions.length > 0
-      ? state.auctions.find((a) => a.id === auctionId)
+      ? getAuctionById(state.auctions, auctionId)
       : newAuction;
   return {
     auction,
@@ -130,8 +134,8 @@ function mapStateToProps(state, ownProps) {
 const mapDispatchToProps = {
   loadAuctions,
   saveAuction,
-  loadUsers: userActions.loadUsers,
-  loadCategories: categoryActions.loadCategories,
+  loadUsers,
+  loadCategories,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageAuctionPage);
