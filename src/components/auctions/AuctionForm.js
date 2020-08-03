@@ -23,9 +23,11 @@ const AuctionForm = ({
       <TextInput
         name="title"
         label="Title"
+        type="title"
         value={auction.title || ""}
         onChange={onChange}
         error={errors.title}
+        autoFocus={true}
       />
 
       <SelectInput
