@@ -14,17 +14,18 @@ const Header = () => {
         Auctions
       </NavLink>
       {" | "}
-      <NavLink to="/login" activeStyle={activeStyle}>
-        Login
-      </NavLink>
-      {" | "}
-      <NavLink to="/signup" activeStyle={activeStyle}>
-        Signup
-      </NavLink>
-      {" | "}
       <NavLink to="/about" activeStyle={activeStyle}>
         About
       </NavLink>
+      <div className="right">
+        <NavLink to="/login" activeStyle={activeStyle}>
+          Login
+        </NavLink>
+        {" | "}
+        <NavLink to="/signup" activeStyle={activeStyle}>
+          Signup
+        </NavLink>
+      </div>
     </nav>
   );
 };

@@ -29,3 +29,8 @@ nav {
   text-align: center;
   padding-top: 5rem;
 }
+
+.right {
+  float: right;
+  text-align: right;
+}
