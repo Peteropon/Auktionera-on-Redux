@@ -3,4 +3,5 @@ export default {
   auctions: [],
   categories: [],
   apiCallsInProgress: 0,
+  isAuthenticated: false,
 };

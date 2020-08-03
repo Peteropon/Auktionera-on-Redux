@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import LoginForm from "./LoginForm";
-import { Auth } from "aws-amplify";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
+import { connect } from "react-redux";
+import { authenticateUser } from "../../redux/actions/authActions";
 
-function LoginPage({ history }) {
+function LoginPage({ history, authenticateUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [saving, setSaving] = useState(false);
@@ -29,17 +30,16 @@ function LoginPage({ history }) {
     event.preventDefault();
     if (!formIsValid()) return;
     setSaving(true);
-    try {
-      await Auth.signIn(email, password);
-      toast.success("You have successfully logged in");
-      history.push("/auctions");
-    } catch (e) {
-      toast.error("Login failed " + e.message);
-      console.info(e.message);
-      setSaving(false);
-    } finally {
-      setSaving(false);
-    }
+    authenticateUser({ email, password })
+      .then(() => {
+        toast.success("You have successfully logged in");
+        history.push("/auctions");
+      })
+      .catch((error) => {
+        toast.error("Login failed " + error.message);
+        console.info(error.message);
+        setSaving(false);
+      });
   }
 
   return (
@@ -62,5 +62,18 @@ function LoginPage({ history }) {
 
 LoginPage.propTypes = {
   history: PropTypes.object.isRequired,
+  authenticateUser: PropTypes.func.isRequired,
 };
-export default LoginPage;
+
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.isAuthenticated,
+    userHasAuthenticated: state.userHasAuthenticated,
+  };
+}
+
+const mapDispatchToProps = {
+  authenticateUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
