@@ -5,12 +5,14 @@ import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
 import { connect } from "react-redux";
 import { authenticateUser } from "../../redux/actions/authActions";
+import { useAppContext } from "../../libs/contextLib";
 
 function LoginPage({ history, authenticateUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [saving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
+  const { userHasAuthenticated } = useAppContext();
 
   function formIsValid() {
     const errors = {};
@@ -32,6 +34,7 @@ function LoginPage({ history, authenticateUser }) {
     setSaving(true);
     authenticateUser({ email, password })
       .then(() => {
+        userHasAuthenticated(true);
         toast.success("You have successfully logged in");
         history.push("/auctions");
       })
