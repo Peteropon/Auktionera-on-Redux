@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 
 const SignupForm = ({
-  newUser,
+  newSignup,
   onSave,
   onChange,
   saving = false,
@@ -21,7 +21,7 @@ const SignupForm = ({
         name="email"
         label="Email"
         type="email"
-        value={newUser.email || ""}
+        value={newSignup.email || ""}
         onChange={onChange}
         error={errors.email}
         autoFocus={true}
@@ -30,7 +30,7 @@ const SignupForm = ({
         name="password"
         label="Password"
         type="password"
-        value={newUser.password || ""}
+        value={newSignup.password || ""}
         onChange={onChange}
         error={errors.password}
       />
@@ -38,19 +38,19 @@ const SignupForm = ({
         name="confirmPassword"
         label="Confirm Password"
         type="password"
-        value={newUser.confirmPassword || ""}
+        value={newSignup.confirmPassword || ""}
         onChange={onChange}
         error={errors.confirmPassword}
       />
       <button type="submit" disabled={saving} className="btn btn-primary">
-        {saving ? "Signing in..." : "Sign in"}
+        {saving ? "Signing up..." : "Sign up"}
       </button>
     </form>
   );
 };
 
 SignupForm.propTypes = {
-  newUser: PropTypes.object.isRequired,
+  newSignup: PropTypes.object.isRequired,
   errors: PropTypes.object,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,

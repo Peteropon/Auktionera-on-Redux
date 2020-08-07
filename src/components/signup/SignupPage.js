@@ -1,31 +1,52 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
 import { useAppContext } from "../../libs/contextLib";
 import SignupForm from "./SignupForm";
+import { Auth } from "aws-amplify";
+import SignupConfirmationForm from "./SignupConfirmationForm";
 
 function SignupPage() {
-  const [newUser, setNewUser] = useState({});
-  const { userHasAuthenticated } = useAppContext();
+  const [newUser, setNewUser] = useState(null);
+  const [newSignup, setNewSignup] = useState({});
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [confirmationCode, setConfirmationCode] = useState("");
 
-  function handleChange(event) {
+  function handleFormChange(event) {
     const { name, value } = event.target;
-    setNewUser((prevNewUser) => ({
-      ...prevNewUser,
+    setNewSignup((prevSignup) => ({
+      ...prevSignup,
       [name]: value,
     }));
+  }
+
+  function handleConfirmationChange(event) {
+    setConfirmationCode(event.target.value);
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
     if (!formIsValid()) return;
+    setLoading(true);
+    try {
+      //   const newUser = Auth.signUp({
+      //     username: newSignup.email,
+      //     password: newSignup.password,
+      //   });
+      setNewUser("test");
+    } catch (error) {
+      console.info(error);
+    }
+    setLoading(false);
+  }
+
+  function handleConfirmation(event) {
+    event.preventDefault();
   }
 
   function formIsValid() {
-    const { email, password, confirmPassword } = newUser;
+    const { email, password, confirmPassword } = newSignup;
     const errors = {};
     if (!email) errors.email = "Title is required";
     if (!password) errors.password = "User is required";
@@ -38,16 +59,33 @@ function SignupPage() {
   function renderForm() {
     return (
       <SignupForm
-        newUser={newUser}
-        onChange={handleChange}
+        newSignup={newSignup}
+        onChange={handleFormChange}
         onSave={handleSubmit}
         errors={errors}
-        loading={loading}
+        saving={loading}
       />
     );
   }
 
-  return <>{loading ? <Spinner /> : renderForm()}</>;
+  function renderConfirmationForm() {
+    return (
+      <SignupConfirmationForm
+        confirmationCode={confirmationCode}
+        onChange={handleConfirmationChange}
+        saving={loading}
+        onSubmit={handleConfirmation}
+      />
+    );
+  }
+
+  return loading ? (
+    <Spinner />
+  ) : (
+    <div className="Signup">
+      {newUser === null ? renderForm() : renderConfirmationForm()}
+    </div>
+  );
 }
 
 export default SignupPage;
