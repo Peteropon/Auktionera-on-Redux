@@ -10,14 +10,14 @@ import { useAppContext } from "../../libs/contextLib";
 function LoginPage({ history, authenticateUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const { userHasAuthenticated } = useAppContext();
 
   function formIsValid() {
     const errors = {};
     if (!email) errors.email = "Email is required";
-    if (!password) errors.password = "What about your password buddy?";
+    if (!password) errors.password = "Seriously? No password, buddy?";
     setErrors(errors);
     return Object.keys(errors).length === 0;
   }
@@ -31,7 +31,7 @@ function LoginPage({ history, authenticateUser }) {
   async function handleSubmit(event) {
     event.preventDefault();
     if (!formIsValid()) return;
-    setSaving(true);
+    setLoading(true);
     authenticateUser({ email, password })
       .then(() => {
         userHasAuthenticated(true);
@@ -41,13 +41,13 @@ function LoginPage({ history, authenticateUser }) {
       .catch((error) => {
         toast.error("Login failed " + error.message);
         console.info(error.message);
-        setSaving(false);
+        setLoading(false);
       });
   }
 
   return (
     <>
-      {saving ? (
+      {loading ? (
         <Spinner />
       ) : (
         <LoginForm
@@ -56,7 +56,7 @@ function LoginPage({ history, authenticateUser }) {
           onChange={handleChange}
           onSave={handleSubmit}
           errors={errors}
-          saving={saving}
+          loading={loading}
         />
       )}
     </>

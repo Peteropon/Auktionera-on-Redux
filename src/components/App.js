@@ -7,6 +7,7 @@ import PageNotFound from "./PageNotFound";
 import AuctionsPage from "./auctions/AuctionsPage";
 import ManageAuctionPage from "./auctions/ManageAuctionPage";
 import LoginPage from "./login/LoginPage";
+import SignupPage from "./signup/SignupPage";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Auth } from "aws-amplify";
@@ -48,6 +49,7 @@ function App() {
           <Route path="/auction:id" component={ManageAuctionPage} />
           <Route path="/auction" component={ManageAuctionPage} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/signup" component={SignupPage} />
           <Route component={PageNotFound} />
         </Switch>
         <ToastContainer autoClose={2500} hideProgressBar />
