@@ -6,12 +6,13 @@ import SignupForm from "./SignupForm";
 import { Auth } from "aws-amplify";
 import SignupConfirmationForm from "./SignupConfirmationForm";
 
-function SignupPage() {
+function SignupPage({ history }) {
   const [newUser, setNewUser] = useState(null);
   const [newSignup, setNewSignup] = useState({});
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [confirmationCode, setConfirmationCode] = useState("");
+  const { userHasAuthenticated } = useAppContext();
 
   function handleFormChange(event) {
     const { name, value } = event.target;
@@ -30,19 +31,32 @@ function SignupPage() {
     if (!formIsValid()) return;
     setLoading(true);
     try {
-      //   const newUser = Auth.signUp({
-      //     username: newSignup.email,
-      //     password: newSignup.password,
-      //   });
-      setNewUser("test");
+      const newUser = Auth.signUp({
+        username: newSignup.email,
+        password: newSignup.password,
+      });
+      setNewUser(newUser);
+      setLoading(false);
     } catch (error) {
       console.info(error);
+      setLoading(false);
     }
-    setLoading(false);
   }
 
-  function handleConfirmation(event) {
+  async function handleConfirmationSubmit(event) {
     event.preventDefault();
+    setLoading(true);
+
+    try {
+      await Auth.confirmSignUp(newSignup.email, confirmationCode);
+      await Auth.signIn(newSignup.email, newSignup.password);
+
+      userHasAuthenticated(true);
+      toast.success("Signup complete.");
+      history.push("/");
+    } catch (e) {
+      setLoading(false);
+    }
   }
 
   function formIsValid() {
@@ -74,7 +88,7 @@ function SignupPage() {
         confirmationCode={confirmationCode}
         onChange={handleConfirmationChange}
         saving={loading}
-        onSubmit={handleConfirmation}
+        onSubmit={handleConfirmationSubmit}
       />
     );
   }

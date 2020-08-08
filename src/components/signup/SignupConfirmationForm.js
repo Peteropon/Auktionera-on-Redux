@@ -18,7 +18,7 @@ const SignupConfirmationForm = ({
         onChange={onChange}
         autoFocus={true}
       />
-      <div>Please check your email for the code</div>
+      <div className="text-muted">Please check your email for the code</div>
       <button type="submit" disabled={saving} className="btn btn-primary">
         {saving ? "Verifying..." : "Verify"}
       </button>
