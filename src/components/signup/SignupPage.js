@@ -5,6 +5,7 @@ import { useAppContext } from "../../libs/contextLib";
 import SignupForm from "./SignupForm";
 import { Auth } from "aws-amplify";
 import SignupConfirmationForm from "./SignupConfirmationForm";
+import PropTypes from "prop-types";
 
 function SignupPage({ history }) {
   const [newUser, setNewUser] = useState(null);
@@ -101,5 +102,9 @@ function SignupPage({ history }) {
     </div>
   );
 }
+
+SignupPage.propTypes = {
+  history: PropTypes.object.isRequired,
+};
 
 export default SignupPage;

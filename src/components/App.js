@@ -12,6 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Auth } from "aws-amplify";
 import { AppContext } from "../libs/contextLib";
+import NewAuction from "./auctions/NewAuction";
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -48,6 +49,7 @@ function App() {
           <Route path="/auctions" component={AuctionsPage} />
           <Route path="/auction:id" component={ManageAuctionPage} />
           <Route path="/auction" component={ManageAuctionPage} />
+          <Route path="/new" component={NewAuction} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignupPage} />
           <Route component={PageNotFound} />

@@ -29,8 +29,23 @@ const AuctionForm = ({
         error={errors.title}
         autoFocus={true}
       />
-
-      <SelectInput
+      <TextInput
+        name="description"
+        label="Description"
+        type="description"
+        value={auction.description || ""}
+        onChange={onChange}
+        error={errors.description}
+      />
+      <TextInput
+        name="startPrice"
+        label="Starting Price"
+        type="startPrice"
+        value={auction.startPrice || ""}
+        onChange={onChange}
+        error={errors.startPrice}
+      />
+      {/* <SelectInput
         name="user"
         label="Seller"
         value={auction.user || ""}
@@ -41,7 +56,7 @@ const AuctionForm = ({
         }))}
         onChange={onChange}
         error={errors.user}
-      />
+      /> */}
 
       <SelectInput
         name="category"
