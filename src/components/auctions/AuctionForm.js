@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
+import Dropzone from "../common/MyDropzone";
 
 const AuctionForm = ({
   auction,
@@ -70,6 +71,8 @@ const AuctionForm = ({
         onChange={onChange}
         error={errors.category}
       />
+
+      <Dropzone />
 
       <button type="submit" disabled={saving} className="btn btn-primary">
         {saving ? "Saving..." : "Save"}

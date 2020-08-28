@@ -6,8 +6,9 @@ import config from "../../config";
 import Spinner from "../common/Spinner";
 import AuctionForm from "./AuctionForm";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 
-function NewAuction({ saveAuction, categories, loadCategories }) {
+function NewAuction({ saveAuction, categories, loadCategories, history }) {
   const [auction, setAuction] = useState({});
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
@@ -44,6 +45,14 @@ function NewAuction({ saveAuction, categories, loadCategories }) {
     event.preventDefault();
     if (!formIsValid()) return;
     setSaving(true);
+    try {
+      await saveAuction(auction);
+      toast.success("Auction created successfully!");
+      history.push("/");
+    } catch (e) {
+      console.info(e);
+      setSaving(false);
+    }
   }
 
   return saving ? (
@@ -64,6 +73,7 @@ NewAuction.propTypes = {
   loadCategories: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   saveAuction: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
