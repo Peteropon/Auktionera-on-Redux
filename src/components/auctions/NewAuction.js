@@ -60,6 +60,12 @@ function NewAuction({ saveAuction, categories, loadCategories }) {
   );
 }
 
+NewAuction.propTypes = {
+  loadCategories: PropTypes.func.isRequired,
+  categories: PropTypes.array.isRequired,
+  saveAuction: PropTypes.func.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
     categories: state.categories,
