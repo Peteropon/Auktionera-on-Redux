@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../common/TextInput";
 import SelectInput from "../common/SelectInput";
-import Dropzone from "../common/MyDropzone";
+import Dropzone from "react-dropzone";
 
 const AuctionForm = ({
   auction,
@@ -10,6 +10,7 @@ const AuctionForm = ({
   categories,
   onSave,
   onChange,
+  onDrop,
   saving = false,
   errors = {},
 }) => {
@@ -72,7 +73,20 @@ const AuctionForm = ({
         error={errors.category}
       />
 
-      <Dropzone />
+      <Dropzone onDrop={onDrop} multiple>
+        {({ getRootProps, getInputProps, isDragActive }) => (
+          <section>
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              {isDragActive ? (
+                <p>Drop the files here ...</p>
+              ) : (
+                <p>Drag n drop some files here, or click to select files</p>
+              )}{" "}
+            </div>
+          </section>
+        )}
+      </Dropzone>
 
       <button type="submit" disabled={saving} className="btn btn-primary">
         {saving ? "Saving..." : "Save"}
@@ -88,6 +102,7 @@ AuctionForm.propTypes = {
   errors: PropTypes.object,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
+  onDrop: PropTypes.func,
   saving: PropTypes.bool,
 };
 
