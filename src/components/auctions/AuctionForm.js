@@ -73,16 +73,20 @@ const AuctionForm = ({
         error={errors.category}
       />
 
-      <Dropzone onDrop={onDrop} multiple>
-        {({ getRootProps, getInputProps, isDragActive }) => (
+      <Dropzone
+        onDrop={onDrop}
+        accept={("image/png", "image/jpg", "image/jpeg")}
+        multiple
+      >
+        {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
           <section>
             <div {...getRootProps()}>
               <input {...getInputProps()} />
-              {isDragActive ? (
-                <p>Drop the files here ...</p>
-              ) : (
-                <p>Drag n drop some files here, or click to select files</p>
-              )}{" "}
+              {!isDragActive && (
+                <p>Drag n drop images here, or click to select image</p>
+              )}
+              {isDragActive && !isDragReject && <p>Drop the image here!</p>}
+              {isDragReject && <p>File type not accepted, sorry!</p>}{" "}
             </div>
           </section>
         )}
