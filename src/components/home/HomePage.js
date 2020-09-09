@@ -8,6 +8,9 @@ const HomePage = () => (
     <Link to="about" className="btn btn-secondary btn-lg">
       Learn more
     </Link>
+    <Link to="new" className="btn btn-primary btn-lg">
+      Create auction
+    </Link>
   </div>
 );
 

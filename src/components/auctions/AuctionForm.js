@@ -79,8 +79,8 @@ const AuctionForm = ({
         multiple
       >
         {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
-          <section>
-            <div {...getRootProps()}>
+          <section className="db">
+            <div className="db-container" {...getRootProps()}>
               <input {...getInputProps()} />
               {!isDragActive && (
                 <p>Drag n drop images here, or click to select image</p>

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { connect } from "react-redux";
 import { saveAuction } from "../../redux/actions/auctionActions";
 import { loadCategories } from "../../redux/actions/categoryActions";
-import config from "../../config";
 import Spinner from "../common/Spinner";
 import AuctionForm from "./AuctionForm";
 import PropTypes from "prop-types";
