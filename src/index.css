@@ -48,3 +48,19 @@ form span.help-block {
   float: right;
   text-align: right;
 }
+
+.db {
+  margin: 0 auto 2em;
+}
+
+.db p {
+  text-align: center;
+}
+.db-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  height: 150px;
+  border: 4px dashed #4aa1f3;
+}
