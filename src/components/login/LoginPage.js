@@ -36,7 +36,7 @@ function LoginPage({ history, authenticateUser }) {
       .then(() => {
         userHasAuthenticated(true);
         toast.success("You have successfully logged in");
-        history.push("/auctions");
+        history.push("/");
       })
       .catch((error) => {
         toast.error("Login failed " + error.message);

@@ -7,6 +7,10 @@ export function loadAuctionSuccess(auctions) {
   return { type: types.LOAD_AUCTIONS_SUCCESS, auctions };
 }
 
+export function loadMyAuctionSuccess(myAuctions) {
+  return { type: types.LOAD_MYAUCTIONS_SUCCESS, myAuctions };
+}
+
 export function updateAuctionSuccess(auction) {
   return { type: types.UPDATE_AUCTION_SUCCESS, auction };
 }
@@ -22,6 +26,20 @@ export function loadAuctions() {
       .getAuctions()
       .then((auctions) => {
         dispatch(loadAuctionSuccess(auctions));
+      })
+      .catch((error) => {
+        dispatch(apiCallError(error));
+        throw error;
+      });
+  };
+}
+
+export function loadMyAuctions() {
+  return async function (dispatch) {
+    dispatch(beginApiCall());
+    API.get("auctions", "/auctions")
+      .then((myAuctions) => {
+        dispatch(loadMyAuctionSuccess(myAuctions));
       })
       .catch((error) => {
         dispatch(apiCallError(error));
