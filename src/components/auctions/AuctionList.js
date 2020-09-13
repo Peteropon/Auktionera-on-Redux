@@ -43,7 +43,7 @@ const AuctionList = ({ auctions }) => (
                 <small className="text-muted">
                   Starting price: {auction.startPrice}
                 </small>
-                <p>Current bid: {auction.currentBid}</p>
+                <p>Current bid: </p>
               </Card.Footer>
             </Card>
           );
