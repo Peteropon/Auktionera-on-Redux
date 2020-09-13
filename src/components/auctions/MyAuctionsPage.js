@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import AuctionList from "./AuctionList";
+import MyAuctionList from "./MyAuctionList";
 import Spinner from "../common/Spinner";
 import { loadMyAuctions } from "../../redux/actions/auctionActions";
 import { Link } from "react-router-dom";
@@ -27,7 +27,7 @@ function MyAuctionsPage({ loadMyAuctions, loading, myAuctions }) {
           <Link to="new" className="btn btn-primary btn-lg">
             Create auction
           </Link>
-          <AuctionList auctions={myAuctions} />
+          <MyAuctionList auctions={myAuctions} />
         </div>
       )}
     </>

@@ -16,7 +16,7 @@ const AuctionList = ({ auctions }) => (
       <CardDeck>
         {auctions.map((auction) => {
           return (
-            <Card className="col" key={auction.id}>
+            <Card className="col" key={auction.auctionId}>
               <Card.Img
                 variant="top"
                 src={photo}
