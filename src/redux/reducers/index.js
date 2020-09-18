@@ -4,12 +4,14 @@ import users from "./userReducer";
 import categories from "./categoryReducer";
 import apiCallsInProgress from "./apiStatusReducer";
 import isAuthenticated from "./authReducer";
+import file from "./fileReducer";
 
 const rootReducer = combineReducers({
   //auctions,
   myAuctions,
   users,
   categories,
+  file,
   apiCallsInProgress,
   isAuthenticated,
 });
