@@ -16,7 +16,7 @@ const AuctionForm = ({
 }) => {
   return (
     <form onSubmit={onSave}>
-      <h2>{auction.id ? "Edit" : "Add"} Auction</h2>
+      <h2>{auction.auctionId ? "Edit" : "Add"} Auction</h2>
       {errors.onSave && (
         <div className="alert alert-danger" role="alert">
           {errors.onSave}
@@ -91,10 +91,21 @@ const AuctionForm = ({
           </section>
         )}
       </Dropzone>
+      <p>
+        Attachment:{" "}
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={auction.attachmentURL}
+        >
+          {auction.attachment}
+        </a>
+      </p>
 
       <button type="submit" disabled={saving} className="btn btn-primary">
         {saving ? "Saving..." : "Save"}
       </button>
+      {auction.auctionId && <button className="btn btn-danger">Delete</button>}
     </form>
   );
 };

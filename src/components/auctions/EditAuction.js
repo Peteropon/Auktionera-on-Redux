@@ -7,29 +7,32 @@ import AuctionForm from "./AuctionForm";
 import PropTypes from "prop-types";
 
 function EditAuction({
+  auction,
   auctionId,
   auctions,
   categories,
   loadCategories,
+  loadFile,
+  file,
   ...props
 }) {
-  const [auction, setAuction] = useState({ ...props.auction });
-  const [attachmentURL, setAttachmentURL] = useState("");
+  // const [auction, setAuction] = useState({ ...props.auction });
 
   useEffect(() => {
     if (categories.length === 0) {
       loadCategories().catch((error) => {
-        alert("Loading categories failed" + error);
+        alert("Loading categories failed -" + error);
       });
     }
     if (auction.attachment) {
-      setAttachmentURL(loadFile(auction.attachment));
+      loadFile(auction.attachment).catch((error) => {
+        alert("Loading file failed -" + error);
+      });
     }
   }, []);
 
   return (
     <>
-      <div>Hi there</div>
       <AuctionForm auction={auction} categories={categories} />
     </>
   );
@@ -42,6 +45,7 @@ EditAuction.propTypes = {
   categories: PropTypes.array.isRequired,
   loadFile: PropTypes.func.isRequired,
   loadCategories: PropTypes.func.isRequired,
+  file: PropTypes.string,
 };
 
 function mapStateToProps(state, ownProps) {
@@ -50,16 +54,19 @@ function mapStateToProps(state, ownProps) {
     (auction) => auction.auctionId === auctionId
   );
   return {
-    auction,
+    auction:
+      state.file === "" ? auction : { ...auction, attachmentURL: state.file },
     auctions: state.myAuctions,
     auctionId,
     categories: state.categories,
+    file: state.file,
   };
 }
 
 const mapDispatchToProps = {
   saveAuction,
   loadCategories,
+  loadFile,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditAuction);

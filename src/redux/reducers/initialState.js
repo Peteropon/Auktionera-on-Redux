@@ -3,7 +3,7 @@ export default {
   auctions: [],
   myAuctions: [],
   categories: [],
-  file: {},
+  file: "",
   apiCallsInProgress: 0,
   isAuthenticated: false,
 };
