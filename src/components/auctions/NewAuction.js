@@ -59,8 +59,7 @@ function NewAuction({ saveAuction, categories, loadCategories, history }) {
     setSaving(true);
     try {
       const attachment = files[0] ? await s3Upload(files[0]) : null;
-      console.info(attachment);
-      await saveAuction(auction);
+      await saveAuction({ ...auction, attachment: attachment });
       toast.success("Auction created successfully!");
       history.push("/");
     } catch (e) {
