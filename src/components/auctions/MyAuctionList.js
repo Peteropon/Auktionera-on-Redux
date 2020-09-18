@@ -8,7 +8,8 @@ const MyAuctionList = ({ auctions }) => (
     {auctions.map((auction) => {
       return (
         <Link key={auction.auctionId} to={"/myauctions/" + auction.auctionId}>
-          <ListGroupItem header={auction.title}>
+          <ListGroupItem>
+            <p>{auction.title}</p>
             {"Created: " + new Date(auction.createdAt).toLocaleString()}
           </ListGroupItem>
         </Link>
