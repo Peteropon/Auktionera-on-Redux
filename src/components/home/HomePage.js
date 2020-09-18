@@ -7,13 +7,15 @@ function HomePage() {
   const { isAuthenticated } = useAppContext();
 
   function renderLander() {
-    <div className="jumbotron">
-      <h1>Administration</h1>
-      <p>React, Redux and stuff</p>
-      <Link to="about" className="btn btn-secondary btn-lg">
-        Learn more
-      </Link>
-    </div>;
+    return (
+      <div className="jumbotron">
+        <h1>Administration</h1>
+        <p>React, Redux and stuff</p>
+        <Link to="about" className="btn btn-secondary btn-lg">
+          Learn more
+        </Link>
+      </div>
+    );
   }
 
   return isAuthenticated ? <MyAuctionsPage /> : renderLander();
