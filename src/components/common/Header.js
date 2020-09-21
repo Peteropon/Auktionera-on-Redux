@@ -21,6 +21,10 @@ const Header = ({ onClick }) => {
         About
       </NavLink>
       <div className="right">
+        <NavLink to="/settings" activeStyle={activeStyle}>
+          Settings
+        </NavLink>
+        {" | "}
         {isAuthenticated ? (
           <NavLink onClick={onClick} to="/">
             Logout

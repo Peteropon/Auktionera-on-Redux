@@ -14,6 +14,7 @@ import { Auth } from "aws-amplify";
 import { AppContext } from "../libs/contextLib";
 import NewAuction from "./auctions/NewAuction";
 import EditAuction from "./auctions/EditAuction";
+import Settings from "./settings/Settings";
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -54,6 +55,7 @@ function App() {
           <Route exact path="/myauctions/:id" component={EditAuction} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignupPage} />
+          <Route exact path="/settings" component={Settings} />
           <Route component={PageNotFound} />
         </Switch>
         <ToastContainer autoClose={2500} hideProgressBar />
