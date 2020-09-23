@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import TextInput from "../common/TextInput";
+import PropTypes from "prop-types";
 
 function BillingForm({ isLoading, onSubmit, ...props }) {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -39,10 +39,9 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
     const { token, error } = await props.stripe.createToken({
       name: billingInfo.name,
     });
-
     setIsProcessing(false);
 
-    onSubmit(billingInfo.storage, { token, error });
+    onSubmit(parseInt(billingInfo.storage, 10), { token, error });
   }
 
   return (
@@ -51,7 +50,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
         name="storage"
         label="Storage"
         type="number"
-        value={billingInfo.storage || ""}
+        value={billingInfo.storage || "1"}
         onChange={handleFormChange}
         error={errors.storage}
         autoFocus={true}
@@ -80,5 +79,11 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
     </form>
   );
 }
+
+BillingForm.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  history: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default injectStripe(BillingForm);
