@@ -5,7 +5,10 @@
     "start": "run-p start:dev start:api",
     "start:dev": "webpack-dev-server --config webpack.config.dev.js --port 3030",
     "prestart:api": "node tools/createMockDb.js",
-    "start:api": "node tools/apiServer.js"
+    "start:api": "node tools/apiServer.js",
+    "prebuild": "rimraf ./build && mkdir build",
+    "build": "webpack --config webpack.config.prod.js",
+    "postbuild": "http-server ./build"
   },
   "dependencies": {
     "aws-amplify": "^3.0.22",
